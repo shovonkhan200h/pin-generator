@@ -2,11 +2,8 @@ const randomNumber =()=>{
     document.getElementById(`generate-button`).addEventListener(`click`,()=>{
     let inputValue= document.getElementById(`generate-display`);
     let newValue = parseInt(inputValue.value);
-    newValue = Math.floor(Math.random()*10000)
-    for(let i=0; i<5; i++){
-        const value = newValue+ i;
-        inputValue.value= value;
-    }    
+    newValue = Math.floor(Math.random()*9999)
+    inputValue.value= newValue;
     });
 }
 
