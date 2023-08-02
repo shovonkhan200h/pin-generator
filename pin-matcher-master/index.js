@@ -1,43 +1,51 @@
-const randomNumber =()=>{
-    document.getElementById(`generate-button`).addEventListener(`click`,()=>{
-    let inputValue= document.getElementById(`generate-display`);
-    let newValue = parseInt(inputValue.value);
-    newValue = Math.floor(Math.random()*9999)
-    inputValue.value= newValue;
-    });
+const btns =()=>{
+  const btns = document.querySelectorAll(`.btns`);
+  btns.forEach(element => {
+      element.addEventListener('click',(e) => {
+          const caclDisplay = document.getElementById(`calc-display`)
+          const result = e.target.innerHTML
+          caclDisplay.value += result;
+      })
+  });
 }
 
-randomNumber()
-
-const calcButton=()=>{
-    const buttons = document.querySelectorAll(`.btns`);
-    const calDisplay = document.getElementById(`calc-display`)
-    buttons.forEach((button)=>{
-        button.addEventListener(`click`, (e)=>{
-            calDisplay.value += e.target.innerHTML;
-        })
-    })
-};
-
-calcButton()
-
-
+btns()
+let leftAttempts = 3;
 const submitButton=()=>{
-    document.getElementById(`submitButton`).addEventListener(`click`,()=>{
+        const caclDisplay = document.getElementById(`calc-display`)
+        const caclDisplayValue = parseInt(caclDisplay.value)
+        const generateValue = document.getElementById(`generate-display`).value
         
-        const calNumber = document.getElementById(`calc-display`);
-        const generateDispla= document.getElementById(`generate-display`);
-        if( calNumber.value == generateDispla.value ){
-            return document.getElementById(`matched`).style.display=`block`
-            
+        if(caclDisplayValue == generateValue){
+              document.getElementById(`matched`).style.display = `block`
         }
-        else{
-            return document.getElementById(`unmathced`).style.display=`block`
+        else {
+             document.getElementById(`unmathced`).style.display = `block`
+             leftAttempts--;
+             if (leftAttempts > 0) {
+              document.getElementById(`lefts`).textContent = `${leftAttempts} try left`;
+            } else {
+              document.getElementById(`lefts`).textContent = `0 try left`;
+              document.getElementById('submitBtn').disabled = true;
+            }
         }
-    })
-
+       
 }
 
-submitButton()
 
+const generateBtn =()=>{
+           const randomNumber = parseInt(Math.random() * 9999)
+           const generateDisplay = document.getElementById(`generate-display`)
+           generateDisplay.value = randomNumber;
+}
 
+const singleRemove =()=>{
+          const currentValue = document.getElementById(`calc-display`).value;
+          const newValue = currentValue.slice(0, -1);;
+          document.getElementById(`calc-display`).value = newValue;
+ 
+}
+
+const cBtn = ()=>{
+  const currentValue = document.getElementById(`calc-display`).value =``
+}
